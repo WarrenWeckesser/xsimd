@@ -1316,11 +1316,30 @@ namespace xsimd
             using type = void;
         };
 
+        template <typename T, class Arch, bool BatchExists = xsimd::types::has_simd_register<T, Arch>::value>
+        struct batch_trait;
+
+        template <typename T, class Arch>
+        struct batch_trait<T, Arch, true>
+        {
+            using type = xsimd::batch<T, Arch>;
+            static constexpr std::size_t size = xsimd::batch<T, Arch>::size;
+        };
+
+        template <typename T, class Arch>
+        struct batch_trait<T, Arch, false>
+        {
+            using type = void;
+            static constexpr std::size_t size = 0;
+        };
+
         template <typename T, std::size_t N, class Arch, class... Archs>
         struct sized_batch<T, N, xsimd::arch_list<Arch, Archs...>>
         {
-            using type = typename std::conditional<xsimd::batch<T, Arch>::size == N, xsimd::batch<T, Arch>,
-                                                   typename sized_batch<T, N, xsimd::arch_list<Archs...>>::type>::type;
+            using type = typename std::conditional<
+                batch_trait<T, Arch>::size == N,
+                typename batch_trait<T, Arch>::type,
+                typename sized_batch<T, N, xsimd::arch_list<Archs...>>::type>::type;
         };
     }
 
