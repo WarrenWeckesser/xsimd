@@ -2,7 +2,7 @@ name: Arm cross-compilation build
 on: [push, pull_request]
 concurrency: 
   group: ${{ github.workflow }}-${{ github.job }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-20.04
