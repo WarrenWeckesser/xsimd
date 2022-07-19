@@ -38,11 +38,20 @@ namespace xsimd
     {                                                              \
         using register_type = VECTOR_TYPE;                         \
         register_type data;                                        \
-        operator register_type() const noexcept { return data; }   \
+        operator register_type() const noexcept                    \
+        {                                                          \
+            return data;                                           \
+        }                                                          \
     };                                                             \
     template <>                                                    \
     struct has_simd_register<SCALAR_TYPE, ISA> : std::true_type    \
     {                                                              \
+    }
+
+#define XSIMD_DECLARE_INVALID_SIMD_REGISTER(SCALAR_TYPE, ISA)    \
+    template <>                                                  \
+    struct has_simd_register<SCALAR_TYPE, ISA> : std::false_type \
+    {                                                            \
     }
 
 #define XSIMD_DECLARE_SIMD_REGISTER_ALIAS(ISA, ISA_BASE)                          \
