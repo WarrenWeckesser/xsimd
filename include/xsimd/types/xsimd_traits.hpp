@@ -16,10 +16,6 @@
 
 #include "xsimd_batch.hpp"
 
-#ifdef XSIMD_ENABLE_XTL_COMPLEX
-#include "xtl/xcomplex.hpp"
-#endif
-
 namespace xsimd
 {
 
@@ -74,9 +70,9 @@ namespace xsimd
         {
         };
 
-#if XSIMD_ENABLE_XTL_COMPLEX
+#ifdef XSIMD_ENABLE_XTL_COMPLEX
         template <class T, class A, bool i3ec>
-        struct static_check_supported_config_emitter<xtl::complex<T, T, i3ec>, A> : static_check_supported_config_emitter<T, A>
+        struct static_check_supported_config_emitter<xtl::xcomplex<T, T, i3ec>, A> : static_check_supported_config_emitter<T, A>
         {
         };
 #endif
@@ -186,7 +182,7 @@ namespace xsimd
         {
         };
 
-#if XSIMD_ENABLE_XTL_COMPLEX
+#ifdef XSIMD_ENABLE_XTL_COMPLEX
         template <class T1, class T2, bool I3EC, class A>
         struct simd_return_type_impl<xtl::xcomplex<T1, T1, I3EC>, T2, A>
             : std::enable_if<simd_condition<T1, T2>::value, batch<std::complex<T2>, A>>

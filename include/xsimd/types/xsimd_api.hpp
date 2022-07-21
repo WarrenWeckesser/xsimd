@@ -1128,7 +1128,7 @@ namespace xsimd
         return kernel::load_complex_aligned<A>(ptr, kernel::convert<batch_value_type> {}, A {});
     }
 
-#if XSIMD_ENABLE_XTL_COMPLEX
+#ifdef XSIMD_ENABLE_XTL_COMPLEX
     template <class To, class A = default_arch, class From, bool i3ec>
     inline simd_return_type<xtl::xcomplex<From, From, i3ec>, To> load_as(xtl::xcomplex<From, From, i3ec> const* ptr, aligned_mode) noexcept
     {
@@ -1170,7 +1170,7 @@ namespace xsimd
         return kernel::load_complex_unaligned<A>(ptr, kernel::convert<batch_value_type> {}, A {});
     }
 
-#if XSIMD_ENABLE_XTL_COMPLEX
+#ifdef XSIMD_ENABLE_XTL_COMPLEX
     template <class To, class A = default_arch, class From, bool i3ec>
     inline simd_return_type<xtl::xcomplex<From, From, i3ec>, To> load_as(xtl::xcomplex<From, From, i3ec> const* ptr, unaligned_mode) noexcept
     {
@@ -1888,7 +1888,7 @@ namespace xsimd
         kernel::store_complex_aligned(dst, src, A {});
     }
 
-#if XSIMD_ENABLE_XTL_COMPLEX
+#ifdef XSIMD_ENABLE_XTL_COMPLEX
     template <class To, class A = default_arch, class From, bool i3ec>
     inline void store_as(xtl::xcomplex<To, To, i3ec>* dst, batch<std::complex<From>, A> const& src, aligned_mode) noexcept
     {
@@ -1922,7 +1922,7 @@ namespace xsimd
         kernel::store_complex_unaligned(dst, src, A {});
     }
 
-#if XSIMD_ENABLE_XTL_COMPLEX
+#ifdef XSIMD_ENABLE_XTL_COMPLEX
     template <class To, class A = default_arch, class From, bool i3ec>
     inline void store_as(xtl::xcomplex<To, To, i3ec>* dst, batch<std::complex<From>, A> const& src, unaligned_mode) noexcept
     {

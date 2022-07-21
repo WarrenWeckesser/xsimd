@@ -417,7 +417,7 @@ namespace xsimd
     struct batch<xtl::xcomplex<T, T, i3ec>, A>
     {
         static_assert(std::is_same<T, void>::value,
-                      "Please use batch<std::complex<T>, A> initialized from xtl::complex instead");
+                      "Please use batch<std::complex<T>, A> initialized from xtl::xcomplex instead");
     };
 #endif
 }
