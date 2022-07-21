@@ -1174,7 +1174,7 @@ namespace xsimd
     template <class To, class A = default_arch, class From, bool i3ec>
     inline simd_return_type<xtl::xcomplex<From, From, i3ec>, To> load_as(xtl::xcomplex<From, From, i3ec> const* ptr, unaligned_mode) noexcept
     {
-        detail::static_check_supported_config<T, A>();
+        detail::static_check_supported_config<To, A>();
         detail::static_check_supported_config<From, A>();
         return load_as<To>(reinterpret_cast<std::complex<From> const*>(ptr), unaligned_mode());
     }
