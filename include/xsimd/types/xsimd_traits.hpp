@@ -70,6 +70,13 @@ namespace xsimd
         {
         };
 
+#if XSIMD_ENABLE_XTL_COMPLEX
+        template <class T, class A, bool i3ec>
+        struct static_check_supported_config_emitter<xtl::complex<T, T, i3ec>, A> : static_check_supported_config_emitter<T, A>
+        {
+        };
+#endif
+
         // consistency checker
         template <class T, class A>
         void static_check_supported_config()
