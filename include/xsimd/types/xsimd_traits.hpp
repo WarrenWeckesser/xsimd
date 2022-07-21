@@ -54,6 +54,28 @@ namespace xsimd
 
         template <class T>
         constexpr size_t simd_traits_impl<T, true>::size;
+
+        template <class T, class A>
+        struct static_check_supported_config_emitter
+        {
+
+            static_assert(A::supported(),
+                          "usage of batch type with unsupported architecture");
+            static_assert(!A::supported() || has_simd_register<T, A>::value,
+                          "usage of batch type with unsupported type");
+        };
+
+        template <class T, class A>
+        struct static_check_supported_config_emitter<std::complex<T>, A> : static_check_supported_config_emitter<T, A>
+        {
+        };
+
+        // consistency checker
+        template <class T, class A>
+        void static_check_supported_config()
+        {
+            (void)static_check_supported_config_emitter<T, A>();
+        }
     }
 
     template <class T>

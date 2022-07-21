@@ -26,10 +26,9 @@ namespace xsimd
         template <class T, class Arch>
         struct simd_register
         {
-            static_assert(Arch::supported(),
-                          "usage of simd_register with unsupported architecture");
-            static_assert(!Arch::supported() || has_simd_register<T, Arch>::value,
-                          "usage of simd_register with unsupported type");
+            struct register_type
+            {
+            };
         };
 
 #define XSIMD_DECLARE_SIMD_REGISTER(SCALAR_TYPE, ISA, VECTOR_TYPE) \
