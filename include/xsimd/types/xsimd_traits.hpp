@@ -16,6 +16,10 @@
 
 #include "xsimd_batch.hpp"
 
+#ifdef XSIMD_ENABLE_XTL_COMPLEX
+#include "xtl/xcomplex.hpp"
+#endif
+
 namespace xsimd
 {
 
